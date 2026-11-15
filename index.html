@@ -35,16 +35,18 @@ body{font-family:"Bonyan",Tahoma,system-ui,sans-serif;font-weight:300;background
 .node.b:hover circle,.node.b.on circle{fill:var(--how);stroke:var(--how)}
 .node.o:hover circle,.node.o.on circle{fill:var(--why);stroke:var(--why)}
 .node:hover .ic,.node.on .ic{stroke:#fff}
-.arc{fill:none;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 1.4s cubic-bezier(.6,0,.2,1) forwards}
-.arc.a2{animation-delay:.25s}.core{transform-box:fill-box;transform-origin:50% 100%;transform:scale(0);animation:grow .6s cubic-bezier(.3,1.6,.5,1) .7s forwards}
-.base{transform-box:fill-box;transform-origin:center;transform:scaleX(0);animation:base .7s ease .1s forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-@keyframes grow{to{transform:scale(1)}}
+.arc{fill:none;stroke-linecap:round}
+.half{fill:none;stroke-linecap:round;transform-box:fill-box;transform-origin:50% 0}
+.half.core-b{fill:#e07a2f;stroke:none}
+.mark.fold .half{animation:fold 1s cubic-bezier(.65,0,.35,1) forwards}
+.mark.fold .half.h2{animation-delay:.12s}.mark.fold .half.core-b{animation-delay:.24s}
+@keyframes fold{0%{transform:scaleY(1);opacity:1}85%{opacity:1}100%{transform:scaleY(-1);opacity:0}}
+.base{transform-box:fill-box;transform-origin:center;transform:scaleX(0)}
+.mark.fold .base{animation:base .6s cubic-bezier(.2,.8,.2,1) .75s forwards}
 @keyframes base{to{transform:scaleX(1)}}
 .mark{cursor:pointer}
-.mark .w1,.mark .w2,.mark .w3{transform-box:fill-box;transform-origin:50% 100%}
-.live .w1{animation:wave 3.4s ease-in-out 2s infinite}.live .w2{animation:wave 3.4s ease-in-out 2.18s infinite}.live .w3{animation:wave 3.4s ease-in-out 2.36s infinite}
-.mark:hover .w1,.mark:hover .w2,.mark:hover .w3{animation-duration:.9s;animation-delay:0s}
+.mark g{transform-box:fill-box;transform-origin:50% 100%}
+.live .w1{animation:wave 3.4s ease-in-out infinite}.live .w2{animation:wave 3.4s ease-in-out .18s infinite}.live .w3{animation:wave 3.4s ease-in-out .36s infinite}
 @keyframes wave{0%,70%,100%{transform:scale(1)}80%{transform:scale(1.08)}90%{transform:scale(.97)}}
 .ripple{fill:none;stroke:var(--how);stroke-width:1.5;opacity:0;transform-origin:300px 300px}
 .ripple.go{animation:rip 1.2s ease-out}
@@ -63,7 +65,7 @@ body{font-family:"Bonyan",Tahoma,system-ui,sans-serif;font-weight:300;background
 .soon .dot{width:7px;height:7px;border-radius:50%;background:var(--what);animation:ping 1.8s infinite}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(91,154,69,.5)}70%,100%{box-shadow:0 0 0 9px rgba(91,154,69,0)}}
 @media (max-width:520px){.brand b{font-size:26px}.soon{font-size:15px}.text{bottom:-24%}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.arc{stroke-dashoffset:0}.core,.base{transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.half{display:none}.base{transform:none}}
 </style>
 </head>
 <body>
@@ -108,11 +110,14 @@ body{font-family:"Bonyan",Tahoma,system-ui,sans-serif;font-weight:300;background
   </g></g>
   <!-- logo mark -->
   <g class="layer" data-d="48">
-    <g class="mark" id="mark" transform="translate(300 312) scale(5.2) translate(-16 -16)">
-      <g class="w1"><path class="arc" d="M3 21a13 13 0 0 1 26 0" stroke="#5b9a45" stroke-width="2.4" pathLength="420"/></g>
-      <g class="w2"><path class="arc a2" d="M8 21a8 8 0 0 1 16 0" stroke="#4a7fe0" stroke-width="2.4" pathLength="420"/></g>
-      <g class="w3"><path class="core" d="M11.5 21a4.5 4.5 0 0 1 9 0z" fill="#e07a2f"/></g>
-      <rect class="base" x="1.5" y="23" width="29" height="2.2" rx="1.1" fill="#18222e"/>
+    <g class="mark" id="mark" transform="translate(300 300) scale(5.2) translate(-16 -21)">
+      <g class="w1"><path class="arc" d="M3 21a13 13 0 0 1 26 0" stroke="#5b9a45" stroke-width="2.4"/></g>
+      <g class="w2"><path class="arc" d="M8 21a8 8 0 0 1 16 0" stroke="#4a7fe0" stroke-width="2.4"/></g>
+      <g class="w3"><path d="M11.5 21a4.5 4.5 0 0 1 9 0z" fill="#e07a2f"/></g>
+      <path class="half h1" d="M3 21a13 13 0 0 0 26 0" stroke="#5b9a45" stroke-width="2.4"/>
+      <path class="half h2" d="M8 21a8 8 0 0 0 16 0" stroke="#4a7fe0" stroke-width="2.4"/>
+      <path class="half core-b" d="M11.5 21a4.5 4.5 0 0 0 9 0z"/>
+      <rect class="base" x="1.5" y="20" width="29" height="2.2" rx="1.1" fill="#18222e"/>
     </g>
   </g>
 </svg>
@@ -126,15 +131,19 @@ body{font-family:"Bonyan",Tahoma,system-ui,sans-serif;font-weight:300;background
 var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 var layers=[].slice.call(document.querySelectorAll(".layer"));
 var mark=document.getElementById("mark");
-setTimeout(function(){mark.classList.add("live")},1600);
+function play(){mark.classList.remove("fold","live");void mark.getBoundingClientRect();
+  setTimeout(function(){mark.classList.add("fold")},900);
+  setTimeout(function(){mark.classList.add("live")},2600)}
+if(reduce){mark.classList.add("fold")}else{play()}
+var busy=0;function replay(){if(busy||reduce)return;busy=1;play();setTimeout(function(){busy=0},3200)}
 if(!reduce&&matchMedia("(hover:hover)").matches){
   window.addEventListener("pointermove",function(e){var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
     layers.forEach(function(l){var d=+l.getAttribute("data-d");l.style.transform="translate("+(-x*d).toFixed(1)+"px,"+(-y*d).toFixed(1)+"px)"})},{passive:true});
 }
 var rip=document.getElementById("rip");
 function ripple(){rip.classList.remove("go");void rip.getBoundingClientRect();rip.classList.add("go")}
-mark.addEventListener("mouseenter",ripple);mark.addEventListener("click",ripple);
-if(!reduce)setInterval(ripple,6000);
+mark.addEventListener("click",function(){ripple();replay()});mark.addEventListener("dblclick",replay);
+if(!reduce)setInterval(ripple,6000);if(!reduce)setInterval(replay,15000);
 [].forEach.call(document.querySelectorAll(".node"),function(n){n.addEventListener("click",function(){n.classList.add("on");clearTimeout(n._t);n._t=setTimeout(function(){n.classList.remove("on")},1200)})});
 })();
 </script>
