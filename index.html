@@ -14,7 +14,7 @@
 html,body{margin:0}
 body{font-family:"Bonyan",Tahoma,system-ui,sans-serif;font-weight:300;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100dvh;overflow-x:hidden;display:flex;flex-direction:column}
 a{color:inherit}
-.top{display:flex;align-items:center;justify-content:space-between;max-width:1120px;width:100%;margin:0 auto;padding:22px 22px 0}
+.top{display:flex;align-items:center;justify-content:center;max-width:1120px;width:100%;margin:0 auto;padding:22px 22px 0}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:default}
 .brand svg{width:44px;height:27px}
 .brand b{font-weight:800;font-size:26px;line-height:1}
@@ -26,7 +26,7 @@ a{color:inherit}
 .soon{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:500;box-shadow:0 4px 14px -8px rgba(24,34,46,.25)}
 .soon .dot{width:8px;height:8px;border-radius:50%;background:var(--what);box-shadow:0 0 0 0 rgba(91,154,69,.5);animation:ping 1.8s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 9px rgba(91,154,69,0)}100%{box-shadow:0 0 0 0 rgba(91,154,69,0)}}
-main{flex:1;max-width:1120px;width:100%;margin:0 auto;padding:30px 22px 10px;display:flex;flex-direction:column;align-items:center;text-align:center}
+main{flex:1;max-width:1120px;width:100%;margin:0 auto;padding:10px 22px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .kicker{display:inline-flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:0 0 16px}
 .kicker span{font-size:13px;font-weight:500;padding:4px 12px;border-radius:999px;transition:transform .2s}
 .kicker span:hover{transform:translateY(-3px) rotate(-2deg)}
@@ -37,7 +37,7 @@ h1 .hl svg{position:absolute;left:0;right:0;bottom:-6px;width:100%;height:12px;o
 h1 .hl path{stroke-dasharray:300;stroke-dashoffset:300;animation:draw 1.2s .6s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 .lead{color:var(--muted);font-size:clamp(16px,2.2vw,19px);line-height:2;max-width:640px;margin:14px 0 0}
-.scene{width:100%;max-width:980px;margin:22px 0 0;position:relative}
+.scene{width:100%;max-width:980px;margin:0;position:relative}
 .scene svg{width:100%;height:auto;display:block;overflow:visible}
 .tip{font-size:13px;color:#8793a1;margin:4px 0 0;display:flex;align-items:center;gap:6px;justify-content:center}
 .tip svg{width:16px;height:16px;animation:nudge 1.6s ease-in-out infinite}
@@ -121,12 +121,9 @@ footer b{color:var(--ink)}
 <body>
 <header class="top">
   <div class="brand" aria-label="کران"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0.5 6.4 31 19"><path class="a1" d="M3 21a13 13 0 0 1 26 0" fill="none" stroke="#5b9a45" stroke-width="2.4" stroke-linecap="round"/><path class="a2" d="M8 21a8 8 0 0 1 16 0" fill="none" stroke="#4a7fe0" stroke-width="2.4" stroke-linecap="round"/><path class="a3" d="M11.5 21a4.5 4.5 0 0 1 9 0z" fill="#e07a2f"/><rect x="1.5" y="23" width="29" height="2.2" rx="1.1" fill="#18222e"/></svg><b>کران</b><i lang="en" dir="ltr">Karaan</i></div>
-  <span class="soon"><span class="dot"></span>به‌زودی</span>
+  
 </header>
 <main>
-  <div class="kicker"><span class="k1">چرا: وقت برای فکر کردن</span><span class="k2">چگونه: کنار تیم شما</span><span class="k3">چه: ایجنت‌های هوش مصنوعی</span></div>
-  <h1>کار تکراری با ایجنت‌ها؛ <span class="hl">فکر کردن با آدم‌ها<svg viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 Q75 1 150 7 T298 5" fill="none" stroke="#e07a2f" stroke-width="4" stroke-linecap="round"/></svg></span></h1>
-  <p class="lead">کران تیمی از ایجنت‌های هوش مصنوعی را داخل شرکت‌ها و کارخانه‌ها مستقر می‌کند تا کار تکراری را انجام دهند و نتیجه را با عدد نشان دهند.</p>
 
   <div class="scene">
   <svg class="s" viewBox="0 0 960 400" role="img" aria-label="صحنه یک کارخانه: ایجنت‌ها کار تکراری را روی نوار نقاله انجام می‌دهند و یک نفر پشت میز فکر می‌کند">
@@ -166,11 +163,6 @@ footer b{color:var(--ink)}
       <g class="gear"><path d="M30 6l4 0 1 6 5 2 5-4 3 3-4 5 2 5 6 1 0 4-6 1-2 5 4 5-3 3-5-4-5 2-1 6-4 0-1-6-5-2-5 4-3-3 4-5-2-5-6-1 0-4 6-1 2-5-4-5 3-3 5 4 5-2z" fill="#c9dbf7" transform="translate(-2 -2)"/><circle cx="30" cy="30" r="7" fill="#f4f5f7"/></g>
       <g transform="translate(40 30)"><g class="gear g2"><path d="M20 4l3 0 1 4 4 2 3-3 2 2-3 3 2 4 4 1 0 3-4 1-2 4 3 3-2 2-3-3-4 2-1 4-3 0-1-4-4-2-3 3-2-2 3-3-2-4-4-1 0-3 4-1 2-4-3-3 2-2 3 3 4-2z" fill="#f8d9bf"/><circle cx="21.5" cy="21.5" r="5" fill="#f4f5f7"/></g></g>
     </g>
-
-    <!-- floating task chips -->
-    <g class="chip"><g transform="translate(380 70)"><rect width="74" height="30" rx="15" fill="#fff" stroke="#e2e6ec"/><text x="37" y="20" text-anchor="middle" font-size="13" fill="#18222e">گزارش</text></g></g>
-    <g class="chip c2"><g transform="translate(470 40)"><rect width="74" height="30" rx="15" fill="#fff" stroke="#e2e6ec"/><text x="37" y="20" text-anchor="middle" font-size="13" fill="#18222e">جدول</text></g></g>
-    <g class="chip c3"><g transform="translate(560 78)"><rect width="80" height="30" rx="15" fill="#fff" stroke="#e2e6ec"/><text x="40" y="20" text-anchor="middle" font-size="13" fill="#18222e">پیگیری</text></g></g>
 
     <!-- ground -->
     <rect x="0" y="330" width="960" height="3" rx="1.5" fill="#d5dbe3"/>
@@ -242,13 +234,11 @@ footer b{color:var(--ink)}
     </g>
   </svg>
   </div>
-  <p class="tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7 17 2.5-7.5L21 11z"/></svg>ماوس را روی صحنه بچرخانید؛ بعضی چیزها واکنش نشان می‌دهند.</p>
 
   <div class="progress" aria-hidden="true"><i></i></div>
   <p class="cta">به‌زودی می‌آییم بالا! <span class="rk" aria-hidden="true">🚀</span></p>
-  <p class="mini">هوش مصنوعی در خدمت صنعت</p>
 </main>
-<footer><b>کران</b> · <span lang="en" dir="ltr">Karaan</span></footer>
+
 <script>
 (function(){
 var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
