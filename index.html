@@ -17,6 +17,10 @@ body:before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,
 .sc{width:min(100vw,1200px);height:auto;max-height:100dvh;overflow:visible}
 .horizon{stroke:#18222e;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:2200;stroke-dashoffset:2200;animation:line 1.2s cubic-bezier(.6,0,.2,1) forwards}
 @keyframes line{to{stroke-dashoffset:0}}
+.lower{opacity:0;animation:fade 1.4s ease 1.2s forwards}
+.lw{fill:none;stroke:#b9c3cf;stroke-width:1.3}.lw.d{stroke-dasharray:3 9}
+.base{transform-box:fill-box;transform-origin:center;transform:scaleX(0);animation:base .7s cubic-bezier(.2,.8,.2,1) .9s forwards}
+@keyframes base{to{transform:scaleX(1)}}
 .tick{stroke:#c4ccd6;stroke-width:1.2;opacity:0;animation:fade .6s ease 1s forwards}
 @keyframes fade{to{opacity:1}}
 .ring{fill:none;stroke:#cdd5df;stroke-width:1.3;stroke-dasharray:1400;stroke-dashoffset:1400;animation:ring 1.6s cubic-bezier(.5,0,.2,1) .6s forwards}
@@ -50,13 +54,16 @@ body:before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,
 .live-dot{fill:var(--what);opacity:0;animation:fade .8s ease 2.2s forwards,blink 1.8s ease-in-out 3s infinite}
 @keyframes blink{50%{opacity:.25}}
 @media (max-width:640px){.sc{width:100vw}.live-dot{display:none}.t1{font-size:58px}.t2{font-size:28px}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.horizon,.ring,.arc{stroke-dashoffset:0}.ring.d,.tick,.node,.t1,.t2,.live-dot{opacity:1}.core{transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.horizon,.ring,.arc{stroke-dashoffset:0}.ring.d,.tick,.node,.t1,.t2,.live-dot{opacity:1}.core,.base{transform:none}.lower{opacity:1}}
 </style>
 </head>
 <body>
 <svg class="sc" viewBox="0 0 1000 560" aria-hidden="true">
+<defs><linearGradient id="fadeg" x1="0" y1="430" x2="0" y2="730" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<mask id="fadem" maskUnits="userSpaceOnUse" x="-600" y="430" width="2200" height="400"><rect x="-600" y="430" width="2200" height="400" fill="url(#fadeg)"/></mask></defs>
+<g class="lower" mask="url(#fadem)"><path class="lw" d="M350 430 A150 150 0 0 0 650 430"/><path class="lw d" d="M285 430 A215 215 0 0 0 715 430"/><path class="lw" d="M220 430 A280 280 0 0 0 780 430"/><path class="lw d" d="M155 430 A345 345 0 0 0 845 430"/><path class="lw" d="M90 430 A410 410 0 0 0 910 430"/></g>
 <line class="horizon" x1="-600" y1="430" x2="1600" y2="430"/>
-<line class="tick" x1="20" y1="425" x2="20" y2="435"/><line class="tick" x1="60" y1="425" x2="60" y2="435"/><line class="tick" x1="100" y1="425" x2="100" y2="435"/><line class="tick" x1="140" y1="425" x2="140" y2="435"/><line class="tick" x1="180" y1="425" x2="180" y2="435"/><line class="tick" x1="220" y1="425" x2="220" y2="435"/><line class="tick" x1="260" y1="425" x2="260" y2="435"/><line class="tick" x1="300" y1="425" x2="300" y2="435"/><line class="tick" x1="340" y1="425" x2="340" y2="435"/><line class="tick" x1="380" y1="425" x2="380" y2="435"/><line class="tick" x1="620" y1="425" x2="620" y2="435"/><line class="tick" x1="660" y1="425" x2="660" y2="435"/><line class="tick" x1="700" y1="425" x2="700" y2="435"/><line class="tick" x1="740" y1="425" x2="740" y2="435"/><line class="tick" x1="780" y1="425" x2="780" y2="435"/><line class="tick" x1="820" y1="425" x2="820" y2="435"/><line class="tick" x1="860" y1="425" x2="860" y2="435"/><line class="tick" x1="900" y1="425" x2="900" y2="435"/><line class="tick" x1="940" y1="425" x2="940" y2="435"/><line class="tick" x1="980" y1="425" x2="980" y2="435"/>
+
 <path class="ripple" id="rip" d="M390 430 A110 110 0 0 1 610 430"/>
 <path id="o0" class="ring" d="M350 430 A150 150 0 0 1 650 430" style="animation-delay:0.00s"/>
 <path id="o1" class="ring d" d="M285 430 A215 215 0 0 1 715 430" style="animation-delay:0.15s"/>
@@ -66,6 +73,7 @@ body:before{content:"";position:fixed;inset:0;background:linear-gradient(180deg,
 <g class="mark" id="mark" transform="translate(500 430) scale(5.4) translate(-16 -24.1)">
 <g class="w1"><path class="arc" d="M3 21a13 13 0 0 1 26 0" stroke="#5b9a45" stroke-width="2.4" pathLength="100"/></g>
 <g class="w2"><path class="arc a2" d="M8 21a8 8 0 0 1 16 0" stroke="#4a7fe0" stroke-width="2.4" pathLength="100"/></g>
+<rect class="base" x="1.5" y="23" width="29" height="2.2" rx="1.1" fill="#18222e"/>
 <g class="w3"><path class="core" d="M11.5 21a4.5 4.5 0 0 1 9 0z" fill="#e07a2f"/></g>
 </g>
 <g class="node g"><g class="pop"><circle r="20"/><g class="ic" stroke="#5b9a45" transform="translate(-10 -10)"><path d="M3 10.5l4 4 10-10"/></g></g><animateMotion dur="14s" begin="-0.00s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#o0"/></animateMotion><animate attributeName="opacity" dur="14s" begin="-0.00s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;.08;.92;1"/></g>
